@@ -1,0 +1,698 @@
+authorization:
+  spec:
+    id: string
+    note: string
+    token_last_eight: string
+    hashed_token: string
+    scopes: array of strings
+    expires_at: datetime
+    created_at: datetime
+    updated_at: datetime
+  example:
+    id: "abcd1234cdef1234abcd1234cdef1234"
+    note: "My Deploy Script"
+    token_last_eight: "1234abcd"
+    hashed_token: "abcd1234cdef1234abcd1234cdef1234abcd1234cdef1234abcd1234cdef1234"
+    scopes: [ "read" ]
+    expires_at: "2015-03-30T09:52:53Z"
+    created_at: "2015-01-28T09:52:53Z"
+    updated_at: "2015-01-28T09:52:53Z"
+
+authorization_with_token:
+  extends: authorization
+  spec:
+    token: string
+  example:
+    token: "abcd1234cdef1234abcd1234cdef1234abcd1234cdef1234abcd1234cdef1234abcd1234cdef1234abcd1234cdef1234abcd1234cdef1234abcd1234cdef1234"
+
+blacklisted_key:
+  spec:
+    id: string
+    name: string
+    created_at: datetime
+    updated_at: datetime
+  example:
+    id: "abcd1234cdef1234abcd1234cdef1234"
+    name: "date.formats.*"
+    created_at: "2015-01-28T09:52:53Z"
+    updated_at: "2015-01-28T09:52:53Z"
+
+comment:
+  spec:
+    id: string
+    message: string
+    user: user_preview
+    created_at: datetime
+    updated_at: datetime
+  example:
+    id: "abcd1234cdef1234abcd1234cdef1234"
+    message: "Some message..."
+    user:
+      id: "abcd1234cdef1234abcd1234cdef1234"
+      username: "joe.doe"
+      name: "Joe Doe"
+    created_at: "2015-01-28T09:52:53Z"
+    updated_at: "2015-01-28T09:52:53Z"
+
+key_preview:
+  spec:
+    id: string
+    name: string
+    plural: boolean
+
+affected_count:
+  spec:
+    records_affected: integer
+  example:
+    records_affected: 96
+
+account:
+  spec:
+    id: string
+    name: string
+    company: string
+    created_at: datetime
+    updated_at: datetime
+  example:
+    id: "abcd1234"
+    name: "Company Account"
+    company: "My Awesome Company"
+    created_at: "2015-01-28T09:52:53Z"
+    updated_at: "2015-01-28T09:52:53Z"
+
+member:
+  spec:
+    id: string
+    email: string
+    username: string
+    role: string
+    projects: array of project_locales
+  example:
+    id: "acbdacbdacbdacbdacbdacbd"
+    email: "foo@bar.com"
+    username: "myname"
+    role: "Manager"
+    projects: 
+      -
+        id: "abcd1234cdef1234abcd1234cdef1234"
+        name: "My Android Project"
+        main_format: "xml"
+        created_at: "2015-01-28T09:52:53Z"
+        updated_at: "2015-01-28T09:52:53Z"
+        locales: 
+          -
+            id: "abcd1234cdef1234abcd1234cdef1234"
+            name: "English"
+            code: "en-Gb"
+
+invitation:
+  spec:
+    id: string
+    email: string
+    role: string
+    state: string
+    projects: array of project_short
+    locales: array of locale_preview
+    created_at: datetime
+    updated_at: datetime
+    accepted_at: datetime
+  example:
+    id: "acbdacbdacbdacbdacbdacbd"
+    email: "foo@bar.com"
+    role: "Manager"
+    state: "accepted"
+    projects:
+      -
+        id: "abcd1234cdef1234abcd1234cdef1234"
+        name: "My Android Project"
+        main_format: "xml"
+        created_at: "2015-01-28T09:52:53Z"
+        updated_at: "2015-01-28T09:52:53Z"
+    locales: 
+      -
+        id: "abcd1234cdef1234abcd1234cdef1234"
+        name: "English"
+        code: "en-GB"
+    created_at: "2015-01-28T09:52:53Z"
+    updated_at: "2015-01-28T09:52:53Z"
+    accepted_at: "2015-02-28T09:52:53Z"
+
+glossary:
+  spec:
+    id: string
+    name: string
+    projects: array of project_short
+    created_at: datetime
+    updated_at: datetime
+  example:
+    id: "abcd1234cdef1234abcd1234cdef1234"
+    name: "My glossary"
+    projects:
+      -
+        id: "abcd1234cdef1234abcd1234cdef1234"
+        name: "My Android Project"
+        main_format: "xml"
+        created_at: "2015-01-28T09:52:53Z"
+        updated_at: "2015-01-28T09:52:53Z"
+    created_at: "2015-01-28T09:52:53Z"
+    updated_at: "2015-01-28T09:52:53Z"
+
+glossary_term:
+  spec:
+    id: string
+    term: string
+    description: string
+    translatable: boolean
+    case_sensitive: boolean
+    translations: array of glossary_term_translation
+    created_at: datetime
+    updated_at: datetime
+  example:
+    id: "abcd1234cdef1234abcd1234cdef1233"
+    term: "Save"
+    description: "This term is used on the 'Save' buttons of our website"
+    translatable: true
+    case_sensitive: true
+    translations:
+      -
+        id: "abcd1234cdef1234abcd1234cdef1234"
+        locale_code: "fr-FR"
+        content: "Entasser"
+        created_at: "2015-01-28T09:52:53Z"
+        updated_at: "2015-01-28T09:52:53Z"
+      -
+        id: "abcd1234cdef1234abcd1234cdef1235"
+        locale_code: "de-DE"
+        content: "Speichern"
+        created_at: "2015-01-28T09:52:53Z"
+        updated_at: "2015-01-28T09:52:53Z"
+    created_at: "2015-01-28T09:52:53Z"
+    updated_at: "2015-01-28T09:52:53Z"
+
+glossary_term_translation:
+  spec:
+    id: string
+    locale_code: string
+    content: string
+    created_at: datetime
+    updated_at: datetime
+  example:
+    id: "abcd1234cdef1234abcd1234cdef1234"
+    locale_code: "en-US"
+    content: "Save"
+    created_at: "2015-01-28T09:52:53Z"
+    updated_at: "2015-01-28T09:52:53Z"
+
+project_short:
+  spec:
+    id: string
+    name: string
+    main_format: string
+    created_at: datetime
+    updated_at: datetime
+  example:
+    id: "abcd1234cdef1234abcd1234cdef1234"
+    name: "My Android Project"
+    main_format: "xml"
+    created_at: "2015-01-28T09:52:53Z"
+    updated_at: "2015-01-28T09:52:53Z"
+    
+project_locales:
+  extends: project_short
+  spec:
+    locales: array of locale_preview
+  example:
+    locales: 
+      -
+        id: "abcd1234cdef1234abcd1234cdef1234"
+        name: "English"
+        code: "en-GB"
+        
+locale_preview:
+  spec:
+    id: string
+    name: string
+    code: string
+  example:
+    id: "abcd1234cdef1234abcd1234cdef1234"
+    name: "English"
+    code: "en-GB"
+
+locale:
+  spec:
+    id: string
+    name: string
+    code: string
+    default: boolean
+    main: boolean
+    rtl: boolean
+    plural_forms: array of strings
+    source_locale: locale_preview
+    created_at: datetime
+    updated_at: datetime
+  example:
+    id: "abcd1234cdef1234abcd1234cdef1234"
+    name: "de"
+    code: "de-DE"
+    default: true
+    main: false
+    rtl: false
+    plural_forms: ["zero","one","other"]
+    source_locale:
+      id: "abcd1234cdef1234abcd1234cdef1234"
+      name: "en"
+      code: "en-GB"
+    created_at: "2015-01-28T09:52:53Z"
+    updated_at: "2015-01-28T09:52:53Z"
+
+locale_statistics:
+  spec:
+    keys_total_count: integer
+    keys_untranslated_count: integer
+    words_total_count: integer
+    translations_completed_count: integer
+    translations_unverified_count: integer
+    unverified_words_count: integer
+    missing_words_count: integer
+
+locale_details:
+  extends: locale
+  spec:
+    statistics: locale_statistics
+  example:
+    statistics:
+      keys_total_count: 2120
+      keys_untranslated_count: 100
+      words_total_count: 3102102
+      translations_completed_count: 1920
+      translations_unverified_count: 32
+      unverified_words_count: 129
+      missing_words_count: 3920
+
+
+upload:
+  spec:
+    id: string
+    filename: string
+    format: string
+    state: string
+    summary:
+      locales_created: integer
+      translation_keys_created: integer
+      translations_created: integer
+      translations_updated: integer
+      tags_created: integer
+    created_at: datetime
+    updated_at: datetime
+  example:
+    id: "abcd1234cdef1234abcd1234cdef1234"
+    filename: "example.json"
+    format: "json"
+    state: "success"
+    summary:
+      locales_created: 2
+      translation_keys_created: 162
+      translations_created: 291
+      translations_updated: 3
+      tags_created: 2
+    created_at: "2015-01-28T09:52:53Z"
+    updated_at: "2015-01-28T09:52:53Z"
+
+format:
+  spec:
+    name: string
+    api_name: string
+    description: string
+    extension: string
+    default_encoding: string
+    importable: boolean
+    exportable: boolean
+    default_file: string
+    renders_default_locale: boolean
+    includes_locale_information: boolean
+
+  example:
+    name: "Ruby/Rails YAML"
+    api_name: "yml"
+    description: "YAML file format for use with Ruby/Rails applications"
+    extension: "yml"
+    default_encoding: "UTF-8"
+    importable: true
+    exportable: true
+    default_file: "./config/locales/<locale_name>.yml"
+    renders_default_locale: false
+    includes_locale_information: true
+
+project_short:
+  spec:
+    id: string
+    name: string
+    main_format: string
+    created_at: datetime
+    updated_at: datetime
+  example:
+    id: "abcd1234cdef1234abcd1234cdef1234"
+    name: "My Android Project"
+    main_format: "xml"
+    created_at: "2015-01-28T09:52:53Z"
+    updated_at: "2015-01-28T09:52:53Z"
+
+project:
+  spec:
+    id: string
+    name: string
+    main_format: string
+    account: account
+    created_at: datetime
+    updated_at: datetime
+  example:
+    id: "abcd1234cdef1234abcd1234cdef1234"
+    name: "My Android Project"
+    main_format: "xml"
+    account: account
+    created_at: "2015-01-28T09:52:53Z"
+    updated_at: "2015-01-28T09:52:53Z"
+
+project_details:
+  extends: project
+  spec:
+    shares_translation_memory: boolean
+  example:
+    shares_translation_memory: true
+
+styleguide:
+  spec:
+    id: string
+    title: string
+    created_at: datetime
+    updated_at: datetime
+  example:
+    id: "abcd1234cdef1234abcd1234cdef1234"
+    title: "My Style Guide"
+    created_at: "2015-01-28T09:52:53Z"
+    updated_at: "2015-01-28T09:52:53Z"
+
+styleguide_preview:
+  spec:
+    id: string
+    title: string
+  example:
+    id: "abcd1234cdef1234abcd1234cdef1234"
+    title: "My Style Guide"
+
+styleguide_details:
+  extends: styleguide
+  spec:
+    public_url: string
+    audience: string
+    target_audience: string
+    grammatical_person: string
+    vocabulary_type: string
+    business: string
+    company_branding: string
+    formatting: string
+    glossary_terms: string
+    grammar_consistency: string
+    literal_translation: string
+    overall_tone: string
+    samples: string
+  example:
+    public_url: "https://phraseapp.com/styleguide/my-project/26f065cf597be340"
+    audience: "customer-facing"
+    target_audience: "teenager"
+    grammatical_person: "first_person_singular"
+    vocabulary_type: "technical"
+    business: "We are a travel site that helps customers find the best hotels and flights."
+    company_branding: "ACME Inc. should never be translated."
+    formatting: "Never use capital letters"
+    glossary_terms: "Appartement, cabin, loft"
+    grammar_consistency: ""
+    literal_translation: "Neutral"
+    overall_tone: "Tone should be fun and light"
+    samples: "http://www.myexample.com/my/document/path/to/samples.pdf"
+
+
+tag:
+  spec:
+    name: string
+    keys_count: integer
+    created_at: datetime
+    updated_at: datetime
+  example:
+    name: "my-feature"
+    keys_count: 8
+    created_at: "2015-01-28T09:52:53Z"
+    updated_at: "2015-01-28T09:52:53Z"
+
+tag_with_stats:
+  extends: tag
+  spec:
+    statistics:
+      -
+        locale: locale_preview
+        statistics:
+          keys_total_count: integer
+          translations_completed_count: integer
+          translations_unverified_count: integer
+          keys_untranslated_count: integer
+  example:
+    statistics:
+      -
+        locale:
+          id: "abcd1234cdef1234abcd1234cdef1234"
+          name: "de"
+          code: "de-DE"
+        statistics:
+          keys_total_count: 12
+          translations_completed_count: 9
+          translations_unverified_count: 11
+          keys_untranslated_count: 3
+
+
+translation:
+  spec:
+    id: string
+    content: string
+    unverified: boolean
+    excluded: boolean
+    plural_suffix: string
+    key: key_preview
+    locale: locale_preview
+    placeholders: array of strings
+    created_at: datetime
+    updated_at: datetime
+  example:
+    id: "abcd1234cdef1234abcd1234cdef1234"
+    content: "My translation"
+    unverified: false
+    excluded: false
+    plural_suffix: ""
+    key:
+      id: "abcd1234cdef1234abcd1234cdef1234"
+      name: "home.index.headline"
+      plural: false
+    locale:
+      id: "abcd1234cdef1234abcd1234cdef1234"
+      name: "de"
+      code: "de-DE"
+    placeholders: ["%{count}"]
+    created_at: "2015-01-28T09:52:53Z"
+    updated_at: "2015-01-28T09:52:53Z"
+
+translation_details:
+  extends: translation
+  spec:
+    user: user_preview
+    word_count: integer
+  example:
+    user:
+      id: "abcd1234cdef1234abcd1234cdef1234"
+      username: "joe.doe"
+      name: "Joe Doe"
+    word_count: 2
+
+translation_key:
+  spec:
+    id: string
+    name: string
+    description: string
+    name_hash: string
+    plural: boolean
+    tags: array of strings
+    data_type: string
+    created_at: datetime
+    updated_at: datetime
+  example:
+    id: "abcd1234cdef1234abcd1234cdef1234"
+    name: "home.index.headline"
+    description: "My description for this key..."
+    name_hash: "1b31d2580ce324f246f66b3be00ed399"
+    plural: false
+    tags: ["feature-xyz", "latest-upload"]
+    data_type: "string"
+    created_at: "2015-01-28T09:52:53Z"
+    updated_at: "2015-01-28T09:52:53Z"
+
+translation_key_details:
+  extends: translation_key
+  spec:
+    name_plural: string
+    comments_count: integer
+    max_characters_allowed: integer
+    screenshot_url: string
+    unformatted: boolean
+    xml_space_preserve: boolean
+    original_file: string
+    format_value_type: string
+  example:
+    name_plural: "home.index.headlines"
+    comments_count: 2
+    data_type: "string"
+    max_characters_allowed: 140
+    screenshot_url: "http://assets.phraseapp.com/screenshot.png"
+    unformatted: false
+    xml_space_preserve: false
+    original_file: ""
+    format_value_type: ""
+
+affected_resources:
+  spec:
+    records_affected: integer
+  example:
+    records_affected: 2
+
+translation_order:
+  spec:
+    id: string
+    lsp: string
+    amount_in_cents: integer
+    currency: string
+    message: string
+    state: string
+    translation_type: string
+    progress_percent: integer
+    source_locale: locale_preview
+    target_locales: array of locale_preview
+    tag: string
+    styleguide: styleguide_preview
+    unverify_translations_upon_delivery: boolean
+    quality: boolean
+    priority: boolean
+    created_at: datetime
+    updated_at: datetime
+  example:
+    id: "30AB4884"
+    lsp: "gengo"
+    amount_in_cents: 1152
+    currency: "usd"
+    message: "Please make everything sound really nice :)"
+    state: "confirmed"
+    translation_type: "pro"
+    progress_percent: 50
+    source_locale:
+      id: "abcd1234cdef1234abcd1234cdef1234"
+      name: "en"
+      code: "en-GB"
+    target_locales:
+      -
+        id: "abcd1234cdef1234abcd1234cdef1234"
+        name: "de"
+        code: "de-DE"
+      -
+        id: "abcd1234cdef1234abcd1234cdef1234"
+        name: "fr"
+        code: "fr-FR"
+    tag: "latest-upload"
+    styleguide:
+      id: "abcd1234cdef1234abcd1234cdef1234"
+      title: "My Styleguide"
+    unverify_translations_upon_delivery: true
+    quality: true
+    priority: true
+    created_at: "2015-01-28T09:52:53Z"
+    updated_at: "2015-01-28T09:52:53Z"
+
+
+translation_version:
+  spec:
+    id: string
+    content: string
+    plural_suffix: string
+    key: key_preview
+    locale: locale_preview
+    created_at: datetime
+    updated_at: datetime
+    changed_at: datetime
+  example:
+    id: "abcd1234cdef1234abcd1234cdef1234"
+    content: "My translation"
+    plural_suffix: ""
+    key:
+      id: "abcd1234cdef1234abcd1234cdef1234"
+      name: "home.index.headline"
+      plural: false
+    locale:
+      id: "abcd1234cdef1234abcd1234cdef1234"
+      name: "en"
+      code: "en-GB"
+    created_at: "2015-01-28T09:52:53Z"
+    updated_at: "2015-01-28T09:52:53Z"
+    changed_at: "2015-01-28T09:52:53Z"
+
+translation_version_with_user:
+  extends: translation_version
+  spec:
+    user: user_preview
+  example:
+    user:
+      id: "abcd1234cdef1234abcd1234cdef1234"
+      username: "joe.doe"
+      name: "Joe Doe"
+
+user_preview:
+  spec:
+    id: string
+    username: string
+    name: string
+
+user:
+  spec:
+    id: string
+    username: string
+    name: string
+    email: string
+    position: string
+    created_at: datetime
+    updated_at: datetime
+  example:
+    id: "abcd1234cdef1234abcd1234cdef1234"
+    username: "joe.doe"
+    name: "Joe Doe"
+    email: "joe@phraseapp.com"
+    position: "Lead Developer"
+    created_at: "2015-01-28T09:52:53Z"
+    updated_at: "2015-01-28T09:52:53Z"
+
+user_preview:
+  spec:
+    id: string
+    username: string
+    name: string
+
+webhook:
+  spec:
+    id: string
+    callback_url: string
+    description: string
+    events: array of strings
+    active: boolean
+    created_at: datetime
+    updated_at: datetime
+  example:
+    id: "abcd1234cdef1234abcd1234cdef1234"
+    callback_url: "http://example.com/hooks/phraseapp-notifications"
+    description: "My webhook for chat notifications"
+    events: "locales:create,translations:update"
+    active: true
+    created_at: "2015-01-28T09:52:53Z"
+    updated_at: "2015-01-28T09:52:53Z"
