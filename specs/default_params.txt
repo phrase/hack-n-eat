@@ -1,0 +1,8 @@
+    -h --help                 show help for action
+    -u --username <Username>  username used for authentication
+    -t --access-token <Token> access token used for authentication
+    --tfa                     use Two-Factor Authentication
+    --host <Host>             Host to send Request to
+    -v --verbose              Verbose output
+    --page <Page>             (default: 1)
+    --per-page <PerPage>      (default: 25)
