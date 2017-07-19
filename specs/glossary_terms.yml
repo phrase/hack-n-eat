@@ -1,0 +1,85 @@
+title: Glossary Terms
+headline: Glossary Terms
+layout: api_resource_v2
+resource_name: glossary_term
+order: 960
+sitemap: true
+params:
+  -
+    name: "term"
+    description: 'Glossary term'
+    type: <code>string</code>
+    optional: false
+    example: "MyCompany"
+  -
+    name: "description"
+    description: 'Description of term'
+    type: <code>string</code>
+    optional: true
+    default: ""
+    example: "Use this when refering to our company"
+  -
+    name: "translatable"
+    description: 'Indicates whether the term should be used for all languages or can be translated'
+    type: <code>boolean</code>
+    optional: true
+    default: false
+    example: true
+  -
+    name: "case_sensitive"
+    description: 'Indicates whether the term is case sensitive'
+    type: <code>boolean</code>
+    optional: true
+    default: false
+    example: true
+actions:
+  index:
+    title: List glossary terms
+    verb: GET
+    url_path: /v2/accounts/:account_id/glossaries/:glossary_id/terms
+    cli_path: glossary_terms/list
+    description: List all glossary terms the current user has access to.
+    paginated: true
+    response:
+      status: 200
+      resource: glossary_term
+      plural: true
+    params: []
+  show:
+    title: Get a single glossary term
+    verb: GET
+    url_path: /v2/accounts/:account_id/glossaries/:glossary_id/terms/:id
+    cli_path: glossary_term/show
+    description: Get details on a single glossary term.
+    response:
+      status: 200
+      resource: glossary_term
+    params: []
+  create:
+    title: Create a glossary term
+    verb: POST
+    url_path: /v2/accounts/:account_id/glossaries/:glossary_id/terms
+    cli_path: glossary_term/create
+    description: Create a new glossary term.
+    response:
+      status: 201
+      resource: glossary_term
+  update:
+    title: Update a glossary term
+    verb: PATCH
+    url_path: /v2/accounts/:account_id/glossaries/:glossary_id/terms/:id
+    cli_path: glossary_term/update
+    description: Update an existing glossary term.
+    response:
+      status: 200
+      resource: glossary_term
+  destroy:
+    title: Delete a glossary term
+    verb: DELETE
+    url_path: /v2/accounts/:account_id/glossaries/:glossary_id/terms/:id
+    cli_path: glossary_term/delete
+    description: Delete an existing glossary term.
+    response:
+      status: 204
+    params: []
+meta_description: "Learn how to manage and modify glossary terms via the PhraseApp Api"

@@ -1,0 +1,48 @@
+title: Glossary Term Translations
+headline: Glossary Term Translations
+layout: api_resource_v2
+resource_name: glossary_term_translation
+order: 970
+sitemap: true
+params:
+  -
+    name: "locale_code"
+    description: 'Identifies the language for this translation'
+    type: <code>string</code>
+    optional: false
+    example: "en-US"
+  -
+    name: "content"
+    description: 'The content of the translation'
+    type: <code>string</code>
+    optional: true
+    example: "My translated term"
+actions:
+  create:
+    title: Create a glossary term translation
+    verb: POST
+    url_path: /v2/accounts/:account_id/glossaries/:glossary_id/terms/:term_id/translations
+    cli_path: glossary_term_translation/create
+    description: Create a new glossary term translation.
+    response:
+      status: 201
+      resource: glossary_term_translation
+  update:
+    title: Update a glossary term translation
+    verb: PATCH
+    url_path: /v2/accounts/:account_id/glossaries/:glossary_id/terms/:term_id/translations/:id
+    cli_path: glossary_term_translation/update
+    description: Update an existing glossary term translation.
+    response:
+      status: 200
+      resource: glossary_term_translation
+  destroy:
+    title: Delete a glossary term translation
+    verb: DELETE
+    url_path: /v2/accounts/:account_id/glossaries/:glossary_id/terms/:term_id/translations/:id
+    cli_path: glossary_term_translation/delete
+    description: Delete an existing glossary term translation.
+    response:
+      status: 204
+    params: []
+meta_description: "Learn how to manage and modify glossary term translations via the PhraseApp Api"

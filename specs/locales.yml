@@ -1,0 +1,173 @@
+title: Locales
+headline: Locales
+layout: api_resource_v2
+resource_name: locale
+order: 300
+sitemap: true
+params:
+  -
+    name: "name"
+    description: 'Locale name'
+    type: <code>string</code>
+    optional: false
+    example: "de"
+  -
+    name: "code"
+    description: 'Locale ISO code'
+    type: <code>string</code>
+    optional: false
+    example: "de-DE"
+  -
+    name: "default"
+    description: 'Indicates whether locale is the default locale. If set to true, the previous default locale the project is no longer the default locale.'
+    type: <code>boolean</code>
+    optional: true
+    default: false
+  -
+    name: "main"
+    description: 'Indicates whether locale is a main locale.'
+    type: <code>boolean</code>
+    optional: true
+    default: false
+  -
+    name: "rtl"
+    description: 'Indicates whether locale is a RTL (Right-to-Left) locale.'
+    type: <code>boolean</code>
+    optional: true
+    default: auto-detected
+  -
+    name: "source_locale_id"
+    description: 'Source locale. Can be the name or public id of the locale. Preferred is the public id.'
+    type: <code>id</code>
+    optional: true
+    example: "abcd1234abcd1234abcd1234abcd1234"
+  -
+    name: "unverify_new_translations"
+    description: 'Indicates that new translations for this locale should be marked as unverified.'
+    type: <code>boolean</code>
+    optional: true
+    default: false
+  -
+    name: "unverify_updated_translations"
+    description: 'Indicates that updated translations for this locale should be marked as unverified.'
+    type: <code>boolean</code>
+    optional: true
+    default: false
+actions:
+  index:
+    title: List locales
+    verb: GET
+    url_path: /v2/projects/:project_id/locales
+    cli_path: locales/list
+    description: List all locales for the given project.
+    paginated: true
+    response:
+      status: 200
+      resource: locale
+      plural: true
+    params: []
+  show:
+    title: Get a single locale
+    verb: GET
+    url_path: /v2/projects/:project_id/locales/:id
+    cli_path: locale/show
+    description: Get details on a single locale for a given project.
+    response:
+      status: 200
+      resource: locale_details
+    params: []
+  create:
+    title: Create a locale
+    verb: POST
+    url_path: /v2/projects/:project_id/locales
+    cli_path: locale/create
+    description: Create a new locale.
+    response:
+      status: 201
+      resource: locale_details
+  update:
+    title: Update a locale
+    verb: PATCH
+    url_path: /v2/projects/:project_id/locales/:id
+    cli_path: locale/update
+    description: Update an existing locale.
+    response:
+      status: 200
+      resource: locale_details
+  destroy:
+    title: Delete a locale
+    verb: DELETE
+    url_path: /v2/projects/:project_id/locales/:id
+    cli_path: locale/delete
+    description: Delete an existing locale.
+    response:
+      status: 204
+    params: []
+  download:
+    title: Download a locale
+    verb: GET
+    url_path: /v2/projects/:project_id/locales/:id/download
+    cli_path: locale/download
+    description: Download a locale in a specific file format.
+    rate_limited: true
+    response:
+      status: 200
+      body: |
+        ---
+        en:
+          title: a Title
+          page:
+            other_content: Other content
+    params:
+      -
+        name: "file_format"
+        description: 'File format name. See the format guide for all supported file formats.'
+        optional: false
+        type: <code>string</code>
+        example: "yml"
+      -
+        name: 'tag'
+        description: 'Limit result to keys tagged with the given tag (identified by its name).'
+        optional: true
+        type: <code>string</code>
+        example: "feature"
+      -
+        name: 'include_empty_translations'
+        description: 'Indicates whether keys without translations should be included in the output as well.'
+        type: <code>boolean</code>
+        optional: true
+        default: false
+      -
+        name: 'keep_notranslate_tags'
+        description: 'Indicates whether [NOTRANSLATE] tags should be kept.'
+        optional: true
+        type: <code>boolean</code>
+        default: false
+      -
+        name: 'convert_emoji'
+        description: 'Indicates whether Emoji symbols should be converted to actual Emojis. <a href="guides/working-with-phraseapp/emoji-support/">Working with Emojis</a>.'
+        optional: true
+        type: <code>boolean</code>
+        default: false
+      -
+        name: "format_options"
+        description: 'Additional formatting and render options. See the <a href="guides/formats">format guide</a> for a list of options available for each format. Specify format options like this: <code>...&format_options[foo]=bar</code>'
+        type: "<code>hash</code>"
+        optional: true
+      -
+        name: "encoding"
+        description: 'Enforces a specific encoding on the file contents. Valid options are "UTF-8", "UTF-16" and "ISO-8859-1".'
+        type: "<code>string</code>"
+        optional: true
+      -
+        name: "skip_unverified_translations"
+        description: 'Indicates whether the locale file should skip all unverified translations.'
+        type: "<code>boolean</code>"
+        optional: true
+        default: false
+      -
+        name: "fallback_locale_id"
+        description: 'If a key has no translation in the locale being downloaded the translation in the fallback locale will be used. Provide the public ID of the locale that should be used as the fallback. Requires include_empty_translations to be set to <code>true</code>.'
+        type: "<code>string</code>"
+        optional: true
+meta_description: "Learn how to manage and modify locales via the PhraseApp Api"

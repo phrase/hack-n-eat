@@ -1,0 +1,20 @@
+title: Formats
+headline: Localization Formats
+layout: api_resource_v2
+resource_name: format
+order: 1500
+sitemap: true
+actions:
+  index:
+    title: List formats
+    verb: GET
+    url_path: /v2/formats
+    cli_path: formats/list
+    description: Get a handy list of all localization file formats supported in PhraseApp.
+    response:
+      status: 200
+      resource: format
+      plural: true
+    params: []
+    authentication: false
+meta_description: "Get a handy list of all localization file formats supported by PhraseApp via the API."

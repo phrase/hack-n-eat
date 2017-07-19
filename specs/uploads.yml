@@ -1,0 +1,106 @@
+title: Uploads
+headline: Uploads
+layout: api_resource_v2
+resource_name: upload
+order: 500
+sitemap: true
+params:
+  -
+    name: "file"
+    description: 'File to be imported'
+    type: "<code>file</code>"
+    optional: false
+    example: "/path/to/my/file.json"
+  -
+    name: "file_format"
+    description: 'File format. Auto-detected when possible and not specified.'
+    type: "<code>string</code>"
+    optional: true
+    example: "json"
+  -
+    name: "locale_id"
+    description: 'Locale of the file''s content. Can be the name or public id of the locale. Preferred is the public id.'
+    type: "<code>id</code>"
+    optional: true
+    example: "abcd1234cdef1234abcd1234cdef1234"
+  -
+    name: "tags"
+    description: 'List of tags separated by comma to be associated with the new keys contained in the upload.'
+    type: "<code>string</code>"
+    optional: true
+    example: "awesome-feature,needs-proofreading"
+  -
+    name: "update_translations"
+    description: 'Indicates whether existing translations should be updated with the file content.'
+    type: "<code>boolean</code>"
+    optional: true
+    default: false
+  -
+    name: "update_descriptions"
+    description: 'Existing key descriptions will be updated with the file content. Empty descriptions overwrite existing descriptions.'
+    type: "<code>boolean</code>"
+    optional: true
+    default: false
+  -
+    name: "convert_emoji"
+    description: 'Indicates whether the file contains Emoji symbols that should be converted. <a href="guides/working-with-phraseapp/emoji-support/">Working with Emojis</a>.'
+    type: "<code>boolean</code>"
+    optional: true
+    default: false
+  -
+    name: "skip_upload_tags"
+    description: 'Indicates whether the upload should not create upload tags.'
+    type: "<code>boolean</code>"
+    optional: true
+    default: false
+  -
+    name: "skip_unverification"
+    description: 'Indicates whether the upload should unverify updated translations.'
+    type: "<code>boolean</code>"
+    optional: true
+    default: false
+  -
+    name: "file_encoding"
+    description: 'Enforces a specific encoding on the file contents. Valid options are "UTF-8", "UTF-16" and "ISO-8859-1".'
+    type: "<code>string</code>"
+    optional: true
+  -
+    name: "format_options"
+    description: 'Additional options available for specific formats. See our format guide for complete list.'
+    type: "<code>hash</code>"
+    optional: true
+    example: "{\"foo\": \"bar\"}"
+
+actions:
+  create:
+    title: Upload a new file
+    verb: POST
+    url_path: /v2/projects/:project_id/uploads
+    cli_path: upload/create
+    description: Upload a new language file. Creates necessary resources in your project.
+    response:
+      status: 201
+      resource: upload
+  show:
+    title: View upload details
+    verb: GET
+    url_path: /v2/projects/:project_id/uploads/:id
+    cli_path: upload/show
+    description: View details and summary for a single upload.
+    response:
+      status: 200
+      resource: upload
+    params: []
+  index:
+    title: List uploads
+    verb: GET
+    url_path: "/v2/projects/:project_id/uploads"
+    cli_path: uploads/list
+    description: List all uploads for the given project.
+    paginated: true
+    response:
+      status: 200
+      resource: upload
+      plural: true
+    params: []
+meta_description: "Learn how to manage and modify uploads via the PhraseApp Api"

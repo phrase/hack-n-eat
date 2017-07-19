@@ -1,0 +1,169 @@
+title: Usage Examples
+headline: API v2 Usage Examples
+layout: api_example_v2
+order: 200
+sitemap: true
+skip_generator: true
+actions:
+  excluded_translations:
+    title: Find excluded translations with a certain content
+    url_path: /v2/projects/:project_id/translations
+    verb: GET
+    cli_path: translations/list
+    description: "List excluded translations for the given project which start with the term <code>PhraseApp</code>."
+    params:
+      -
+        name: sort
+        example: "updated_at"
+        description: "Sort criteria. Can be one of: key_name, created_at, updated_at."
+        type: <code>string</code>
+        default: key_name
+        optional: true
+      -
+        name: order
+        example: "desc"
+      -
+        name: q
+        example: "PhraseApp* excluded:true"
+  unverified_translations:
+    title: Find unverified translations with a certain content
+    url_path: /v2/projects/:project_id/translations
+    verb: GET
+    cli_path: translations/list
+    description: "List unverified translations for the given project which start with the term <code>PhraseApp</code> and are not verified."
+    params:
+      -
+        name: sort
+        example: "updated_at"
+        description: "Sort criteria. Can be one of: key_name, created_at, updated_at."
+        type: <code>string</code>
+        default: key_name
+        optional: true
+      -
+        name: order
+        example: "desc"
+      -
+        name: q
+        example: "PhraseApp* unverified:true"
+  verify_translations:
+    title: Verify translations selected by query
+    url_path: /v2/projects/:project_id/translations/verify
+    verb: PATCH
+    cli_path: translations/verify
+    description: "Verify all translations that are matching the query <code>my dog</code>."
+    params:
+      -
+        name: q
+        example: "my dog unverified:true"
+      -
+        name: sort
+        example: "updated_at"
+      -
+        name: order
+        example: "desc"
+  updated_keys:
+    title: Find recently updated keys
+    url_path: /v2/projects/:project_id/keys
+    verb: GET
+    cli_path: keys/list
+    description: "Find updated keys with with the <code>updated_at</code> qualifier like <code>updated_at:>=2013-02-21T00:00:00Z</code>. This example returns keys that have been updated on or after 2013-02-21."
+    params:
+      -
+        name: sort
+        example: "updated_at"
+      -
+        name: order
+        example: "desc"
+      -
+        name: q
+        example: "updated_at:>=2013-02-21T00:00:00Z"
+      -
+        name: locale_id
+        example: "abcd1234abcd1234abcd1234abcd1234"
+  tagged_keys:
+    title: Find keys with a certain tag
+    url_path: /v2/projects/:project_id/keys
+    verb: GET
+    cli_path: keys/list
+    description: "Keys with certain tags can be filtered with the qualifier <code>tags:</code>."
+    params:
+      -
+        name: q
+        example: "tags:admin"
+  tag:
+    title: Add tags to collection of keys
+    url_path: /v2/projects/:project_id/keys/tag
+    verb: PATCH
+    cli_path: keys/tag
+    description: "Add the tags <code>landing-page</code> and <code>release-1.2</code> to all keys that start with <code>dog</code> and are translated in the locale <code>abcd1234abcd1234abcd1234abcd1234</code>."
+    params:
+      -
+        name: q
+        example: "dog* translated:true"
+      -
+        name: tags
+        example: "landing-page,release-1.2"
+      -
+        name: locale_id
+        example: "abcd1234abcd1234abcd1234abcd1234"
+  untag:
+    title: Remove tags from collection of keys
+    url_path: /v2/projects/:project_id/keys/untag
+    verb: PATCH
+    cli_path: keys/untag
+    description: "Remove the tags <code>landing-page</code> and <code>release-1.2</code> from all keys that start with <code>dog</code> and are translated in the locale <code>abcd1234abcd1234abcd1234abcd1234</code>."
+    params:
+      -
+        name: q
+        example: "dog* translated:true"
+      -
+        name: tags
+        example: "landing-page,release-1.2"
+      -
+        name: locale_id
+        example: "abcd1234abcd1234abcd1234abcd1234"
+  broad_match:
+    title: Find keys with broad text match
+    url_path: /v2/projects/:project_id/keys
+    verb: GET
+    cli_path: keys/list
+    description: Example query <code>my dog</code>
+    params:
+      -
+        name: q
+        example: "my dog"
+    matches:
+        <span class="match"><b>My dog</b> is lazy<br></span>
+        <span class="match"><b>my dog</b> is lazy<br></span>
+        <span class="match">angry <b>dog</b> in <b>my</b> house</span>
+
+  exact_match:
+    title: Find keys with exact text match
+    url_path: /v2/projects/:project_id/keys
+    verb: GET
+    cli_path: keys/list
+    description: Example query <code>"my dog is lazy"</code>
+    params:
+      -
+        name: q
+        example: "my dog is lazy"
+    matches:
+        <s>My dog is lazy</s><br>
+        <span class="match"><b>my dog is lazy</b><br></span>
+        <s>angry dog in my house</s>
+
+  wildcard_match:
+    title: Find keys with wildcard character matching
+    url_path: /v2/projects/:project_id/keys
+    verb: GET
+    cli_path: keys/list
+    description: Example query <code>*dog is*</code>
+    params:
+      -
+        name: q
+        example: "*dog is*"
+    matches:
+        <span class="match">My <b>dog is</b> lazy<br></span>
+        <span class="match">my <b>dog is</b> lazy<br></span>
+        <s>angry dog in my house</s>
+meta_description: "Learn how to work more efficiently with PhraseApp API with these workflow-oriented examples."

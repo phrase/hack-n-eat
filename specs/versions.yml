@@ -1,0 +1,31 @@
+title: Versions
+headline: Versions / History
+layout: api_resource_v2
+resource_name: translation_version
+order: 800
+sitemap: true
+actions:
+  index:
+    title: List all versions
+    verb: GET
+    url_path: /v2/projects/:project_id/translations/:translation_id/versions
+    cli_path: versions/list
+    description: List all versions for the given translation.
+    paginated: true
+    response:
+      status: 200
+      resource: translation_version
+      plural: true
+    params: []
+  show:
+    title: Get a single version
+    verb: GET
+    url_path: /v2/projects/:project_id/translations/:translation_id/versions/:id
+    cli_path: version/show
+    description: Get details on a single version.
+    response:
+      status: 200
+      resource: translation_version_with_user
+    params: []
+
+meta_description: "Learn how to manage and modify versions via the PhraseApp Api"

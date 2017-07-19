@@ -1,0 +1,57 @@
+title: Tags
+headline: Tags
+layout: api_resource_v2
+resource_name: tag
+order: 600
+sitemap: true
+params:
+  -
+    name: "name"
+    description: 'Name of the tag'
+    type: <code>string</code>
+    optional: false
+    example: "my-feature"
+
+actions:
+  index:
+    title: List tags
+    verb: GET
+    url_path: /v2/projects/:project_id/tags
+    cli_path: tags/list
+    description: List all tags for the given project.
+    paginated: true
+    response:
+      status: 200
+      resource: tag
+      plural: true
+    params: []
+  show:
+    title: Get a single tag
+    verb: GET
+    url_path: /v2/projects/:project_id/tags/:name
+    cli_path: tag/show
+    description: Get details and progress information on a single tag for a given project.
+    response:
+      status: 200
+      resource: tag_with_stats
+    params: []
+  create:
+    title: Create a tag
+    verb: POST
+    url_path: /v2/projects/:project_id/tags
+    cli_path: tag/create
+    description: Create a new tag.
+    response:
+      status: 201
+      resource: tag_with_stats
+  destroy:
+    title: Delete a tag
+    verb: DELETE
+    url_path: /v2/projects/:project_id/tags/:name
+    cli_path: tag/delete
+    description: Delete an existing tag.
+    response:
+      status: 204
+    params: []
+
+meta_description: "Learn how to manage and modify tags via the PhraseApp Api"

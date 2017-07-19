@@ -1,0 +1,83 @@
+title: Projects
+headline: Projects
+layout: api_resource_v2
+resource_name: project
+order: 200
+sitemap: true
+params:
+  -
+    name: "name"
+    description: 'Name of the project'
+    type: <code>string</code>
+    optional: false
+    example: "My Android Project"
+  -
+    name: "main_format"
+    description: 'Main file format specified by its API Extension name. Used for locale downloads if no format is specified. For API Extension names of available file formats see <a href="guides/formats/">Format Guide</a> or our <a href="https://api.phraseapp.com/api/v2/formats">Formats API Endpoint</a>.'
+    type: <code>string</code>
+    optional: true
+    example: "yml"
+  -
+    name: "shares_translation_memory"
+    description: 'Indicates whether the project should share the account''s translation memory'
+    type: <code>boolean</code>
+    optional: true
+    default: false
+    example: true
+  -
+    name: "account_id"
+    description: 'Account ID to specify the actual account the project should be created in. Required if the requesting user is a member of multiple accounts.'
+    type: <code>string</code>
+    optional: true
+    example: "abcd1234"
+actions:
+  index:
+    title: List projects
+    verb: GET
+    url_path: /v2/projects
+    cli_path: projects/list
+    description: List all projects the current user has access to.
+    paginated: true
+    response:
+      status: 200
+      resource: project
+      plural: true
+    params: []
+  show:
+    title: Get a single project
+    verb: GET
+    url_path: /v2/projects/:id
+    cli_path: project/show
+    description: Get details on a single project.
+    response:
+      status: 200
+      resource: project_details
+    params: []
+  create:
+    title: Create a project
+    verb: POST
+    url_path: /v2/projects
+    cli_path: project/create
+    description: Create a new project.
+    response:
+      status: 201
+      resource: project_details
+  update:
+    title: Update a project
+    verb: PATCH
+    url_path: /v2/projects/:id
+    cli_path: project/update
+    description: Update an existing project.
+    response:
+      status: 200
+      resource: project_details
+  destroy:
+    title: Delete a project
+    verb: DELETE
+    url_path: /v2/projects/:id
+    cli_path: project/delete
+    description: Delete an existing project.
+    response:
+      status: 204
+    params: []
+meta_description: "Learn how to manage and modify projects via the PhraseApp Api"

@@ -1,0 +1,70 @@
+title: Glossaries
+headline: Glossaries
+layout: api_resource_v2
+resource_name: glossary
+order: 950
+sitemap: true
+params:
+  -
+    name: "name"
+    description: 'Name of the glossary'
+    type: <code>string</code>
+    optional: false
+    example: "My glossary"
+  -
+    name: "project_ids"
+    description: 'List of project ids the glossary should be assigned to.'
+    type: <code>string</code>
+    optional: true
+    example: "abcd1234abcd1234abcd1234,abcd1234abcd1234abcd1235"
+actions:
+  index:
+    title: List glossaries
+    verb: GET
+    url_path: /v2/accounts/:account_id/glossaries
+    cli_path: glossaries/list
+    description: List all glossaries the current user has access to.
+    paginated: true
+    response:
+      status: 200
+      resource: glossary
+      plural: true
+    params: []
+  show:
+    title: Get a single glossary
+    verb: GET
+    url_path: /v2/accounts/:account_id/glossaries/:id
+    cli_path: glossary/show
+    description: Get details on a single glossary.
+    response:
+      status: 200
+      resource: glossary
+    params: []
+  create:
+    title: Create a glossary
+    verb: POST
+    url_path: /v2/accounts/:account_id/glossaries
+    cli_path: glossary/create
+    description: Create a new glossary.
+    response:
+      status: 201
+      resource: glossary
+  update:
+    title: Update a glossary
+    verb: PATCH
+    url_path: /v2/accounts/:account_id/glossaries/:id
+    cli_path: glossary/update
+    description: Update an existing glossary.
+    response:
+      status: 200
+      resource: glossary
+  destroy:
+    title: Delete a glossary
+    verb: DELETE
+    url_path: /v2/accounts/:account_id/glossaries/:id
+    cli_path: glossary/delete
+    description: Delete an existing glossary.
+    response:
+      status: 204
+    params: []
+meta_description: "Learn how to manage and modify glossaries via the PhraseApp Api"

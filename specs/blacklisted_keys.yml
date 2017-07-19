@@ -1,0 +1,66 @@
+title: Blacklisted Keys
+headline: Rules for blacklisting keys
+layout: api_resource_v2
+resource_name: blacklisted_key
+order: 800
+sitemap: true
+params:
+  -
+    name: "name"
+    description: 'Blacklisted key name'
+    type: "<code>string</code>"
+    optional: false
+    example: "date.formats.*"
+
+actions:
+  index:
+    title: List blacklisted keys
+    verb: GET
+    url_path: /v2/projects/:project_id/blacklisted_keys
+    cli_path: blacklisted_keys/list
+    description: List all rules for blacklisting keys for the given project.
+    paginated: true
+    response:
+      status: 200
+      resource: blacklisted_key
+      plural: true
+    params: []
+  show:
+    title: Get a single blacklisted key
+    verb: GET
+    url_path: /v2/projects/:project_id/blacklisted_keys/:id
+    cli_path: blacklisted_key/show
+    description: Get details on a single rule for blacklisting keys for a given project.
+    response:
+      status: 200
+      resource: blacklisted_key
+    params: []
+  create:
+    title: Create a blacklisted key
+    verb: POST
+    url_path: /v2/projects/:project_id/blacklisted_keys
+    cli_path: blacklisted_key/create
+    description: Create a new rule for blacklisting keys.
+    response:
+      status: 201
+      resource: blacklisted_key
+  update:
+    title: Update a blacklisted key
+    verb: PATCH
+    url_path: /v2/projects/:project_id/blacklisted_keys/:id
+    cli_path: blacklisted_key/update
+    description: Update an existing rule for blacklisting keys.
+    response:
+      status: 200
+      resource: blacklisted_key
+  destroy:
+    title: Delete a blacklisted key
+    verb: DELETE
+    url_path: /v2/projects/:project_id/blacklisted_keys/:id
+    cli_path: blacklisted_key/delete
+    description: Delete an existing rule for blacklisting keys.
+    response:
+      status: 204
+    params: []
+
+meta_description: "Learn how to manage and modify blacklisted keys via the PhraseApp Api"

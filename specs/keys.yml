@@ -1,0 +1,292 @@
+title: Keys
+headline: Keys
+layout: api_resource_v2
+resource_name: translation_key
+order: 400
+sitemap: true
+placeholders:
+  q_description: "Specify a query to find keys by name (including wildcards).<br><br>
+                      The following qualifiers are also supported in the search term:<br>
+                      <ul>
+                        <li><code>ids:key_id,...</code> for queries on a comma-separated list of ids</li>
+                        <li><code>name:key_name</code> for text queries on key names</li>
+                        <li><code>tags:tag_name</code> to filter for keys with certain tags</li>
+                        <li><code>translated:{true|false}</code> for translation status (also requires <code>locale_id</code> to be specified)</li>
+                        <li><code>updated_at:{>=|<=}2013-02-21T00:00:00Z</code> for date range queries</li>
+                        <li><code>unmentioned_in_upload:upload_id</code> to filter keys unmentioned within upload</li>
+                      </ul>
+                      Find more examples <a href=\"api/v2/general/examples/\">here</a>."
+params:
+  -
+    name: "name"
+    description: 'Key name'
+    type: "<code>string</code>"
+    optional: false
+    example: "home.index.headline"
+  -
+    name: "description"
+    description: 'Key description (usually includes contextual information for translators)'
+    type: "<code>string</code>"
+    optional: true
+    example: "Some description worth knowing..."
+  -
+    name: "plural"
+    description: 'Indicates whether key supports pluralization'
+    type: "<code>boolean</code>"
+    optional: true
+    default: false
+  -
+    name: "name_plural"
+    description: 'Plural name for the key (used in some file formats, e.g. Gettext)'
+    type: "<code>string</code>"
+    optional: true
+    example: "home.index.headlines"
+  -
+    name: "data_type"
+    description: 'Type of the key. Can be one of the following: string, number, boolean, number, array.'
+    type: "<code>string</code>"
+    optional: true
+    default: "string"
+    example: "number"
+  -
+    name: "tags"
+    description: 'List of tags separated by comma to be associated with the key.'
+    type: "<code>string</code>"
+    optional: true
+    example: "awesome-feature,needs-proofreading"
+  -
+    name: "max_characters_allowed"
+    description: 'Max. number of characters translations for this key can have.'
+    type: "<code>integer</code>"
+    optional: true
+    example: 140
+  -
+    name: "screenshot"
+    description: 'Screenshot/image for the key.'
+    type: "<code>file</code>"
+    optional: true
+    example: "/path/to/my/screenshot.png"
+  -
+    name: "remove_screenshot"
+    description: 'Indicates whether the screenshot will be deleted.'
+    type: "<code>boolean</code>"
+    optional: true
+    default: false
+  -
+    name: "unformatted"
+    description: 'Indicates whether the key should be exported as "unformatted". Supported by Android XML and other formats.'
+    type: "<code>boolean</code>"
+    optional: true
+    default: false
+  -
+    name: "xml_space_preserve"
+    description: 'Indicates whether the key should be exported with "xml:space=preserve". Supported by several XML-based formats.'
+    type: "<code>boolean</code>"
+    optional: true
+    default: false
+  -
+    name: "original_file"
+    description: 'Original file attribute. Used in some formats, e.g. XLIFF.'
+    type: "<code>string</code>"
+    optional: true
+  -
+    name: "localized_format_string"
+    description: 'NSStringLocalizedFormatKey attribute. Used in .stringsdict format.'
+    type: "<code>string</code>"
+    optional: true
+  -
+    name: "localized_format_key"
+    description: 'NSStringLocalizedFormatKey attribute. Used in .stringsdict format.'
+    type: "<code>string</code>"
+    optional: true
+actions:
+  index:
+    title: List keys
+    verb: GET
+    url_path: /v2/projects/:project_id/keys
+    cli_path: keys/list
+    description: "List all keys for the given project. Alternatively you can POST requests to /search."
+    paginated: true
+    response:
+      status: 200
+      resource: translation_key
+      plural: true
+    params:
+      -
+        name: sort
+        description: "Sort by field. Can be one of: name, created_at, updated_at."
+        type: <code>string</code>
+        default: name
+        optional: true
+        example: "updated_at"
+      -
+        name: order
+        description: "Order direction. Can be one of: asc, desc."
+        type: <code>string</code>
+        default: asc
+        optional: true
+        example: "desc"
+      -
+        name: q
+        description: q_description_placeholder
+        type: <code>string</code>
+        optional: true
+        example: "mykey* translated:true"
+      -
+        name: locale_id
+        description: "Locale used to determine the translation state of a key when filtering for untranslated or translated keys."
+        type: <code>id</code>
+        optional: true
+        example: "abcd1234abcd1234abcd1234abcd1234"
+  search:
+    title: Search keys
+    verb: POST
+    url_path: /v2/projects/:project_id/keys/search
+    cli_path: keys/search
+    description: "Search keys for the given project matching query."
+    paginated: true
+    response:
+      status: 200
+      resource: translation_key
+      plural: true
+    params:
+      -
+        name: sort
+        description: "Sort by field. Can be one of: name, created_at, updated_at."
+        type: <code>string</code>
+        default: name
+        optional: true
+        example: "updated_at"
+      -
+        name: order
+        description: "Order direction. Can be one of: asc, desc."
+        type: <code>string</code>
+        default: asc
+        optional: true
+        example: "desc"
+      -
+        name: q
+        description: q_description_placeholder
+        type: <code>string</code>
+        optional: true
+        example: "mykey* translated:true"
+      -
+        name: locale_id
+        description: "Locale used to determine the translation state of a key when filtering for untranslated or translated keys."
+        type: <code>id</code>
+        optional: true
+        example: "abcd1234abcd1234abcd1234abcd1234"
+  show:
+    title: Get a single key
+    verb: GET
+    url_path: /v2/projects/:project_id/keys/:id
+    cli_path: key/show
+    description: Get details on a single key for a given project.
+    response:
+      status: 200
+      resource: translation_key_details
+    params: []
+  create:
+    title: Create a key
+    verb: POST
+    url_path: /v2/projects/:project_id/keys
+    cli_path: key/create
+    description: Create a new key.
+    response:
+      status: 201
+      resource: translation_key_details
+  update:
+    title: Update a key
+    verb: PATCH
+    url_path: /v2/projects/:project_id/keys/:id
+    cli_path: key/update
+    description: Update an existing key.
+    response:
+      status: 200
+      resource: translation_key_details
+  destroy:
+    title: Delete a key
+    verb: DELETE
+    url_path: /v2/projects/:project_id/keys/:id
+    cli_path: key/delete
+    description: Delete an existing key.
+    response:
+      status: 204
+    params: []
+  destroy-list:
+    title: Delete collection of keys
+    verb: DELETE
+    url_path: /v2/projects/:project_id/keys
+    cli_path: keys/delete
+    description: "Delete all keys matching query. Same constraints as list. Please limit the number of affected keys to about 1,000 as you might experience timeouts otherwise."
+    response:
+      status: 200
+      resource: affected_resources
+    params:
+      -
+        name: q
+        description: q_description_placeholder
+        type: <code>string</code>
+        optional: true
+        example: "mykey* translated:true"
+      -
+        name: locale_id
+        description: "Locale used to determine the translation state of a key when filtering for untranslated or translated keys."
+        type: <code>id</code>
+        optional: true
+        example: "abcd1234abcd1234abcd1234abcd1234"
+  tag:
+    title: Add tags to collection of keys
+    verb: PATCH
+    url_path: /v2/projects/:project_id/keys/tag
+    cli_path: keys/tag
+    description: "Tags all keys matching query. Same constraints as list."
+    response:
+      status: 200
+      resource: affected_resources
+    params:
+      -
+        name: q
+        description: q_description_placeholder
+        type: <code>string</code>
+        optional: true
+        example: "mykey* translated:true"
+      -
+        name: locale_id
+        description: "Locale used to determine the translation state of a key when filtering for untranslated or translated keys."
+        type: <code>id</code>
+        optional: true
+        example: "abcd1234abcd1234abcd1234abcd1234"
+      -
+        name: tags
+        type: "<code>string</code>"
+        description: "Tag or comma-separated list of tags to add to the matching collection of keys"
+        example: "landing-page,release-1.2"
+  untag:
+    title: Remove tags from collection of keys
+    verb: PATCH
+    url_path: /v2/projects/:project_id/keys/untag
+    cli_path: keys/untag
+    description: "Removes specified tags from keys matching query."
+    response:
+      status: 200
+      resource: affected_resources
+    params:
+      -
+        name: q
+        description: q_description_placeholder
+        type: <code>string</code>
+        optional: true
+        example: "mykey* translated:true"
+      -
+        name: locale_id
+        description: "Locale used to determine the translation state of a key when filtering for untranslated or translated keys."
+        type: <code>id</code>
+        optional: true
+        example: "abcd1234abcd1234abcd1234abcd1234"
+      -
+        name: tags
+        type: "<code>string</code>"
+        description: "Tag or comma-separated list of tags to add to the matching collection of keys"
+        example: "landing-page,release-1.2"
+meta_description: "Learn how to manage and modify keys via the PhraseApp Api"

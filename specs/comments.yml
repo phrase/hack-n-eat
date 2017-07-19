@@ -1,0 +1,93 @@
+title: Comments
+headline: Comments
+layout: api_resource_v2
+resource_name: comment
+order: 700
+sitemap: true
+params:
+  -
+    name: "message"
+    description: 'Comment message'
+    type: "<code>string</code>"
+    optional: false
+    example: "Some message..."
+
+actions:
+  index:
+    title: List comments
+    verb: GET
+    url_path: /v2/projects/:project_id/keys/:key_id/comments
+    cli_path: comments/list
+    description: List all comments for a key.
+    paginated: true
+    response:
+      status: 200
+      resource: comment
+      plural: true
+    params: []
+  show:
+    title: Get a single comment
+    verb: GET
+    url_path: /v2/projects/:project_id/keys/:key_id/comments/:id
+    cli_path: comment/show
+    description: Get details on a single comment.
+    response:
+      status: 200
+      resource: comment
+    params: []
+  create:
+    title: Create a comment
+    verb: POST
+    url_path: /v2/projects/:project_id/keys/:key_id/comments
+    cli_path: comment/create
+    description: Create a new comment for a key.
+    response:
+      status: 201
+      resource: comment
+  update:
+    title: Update a comment
+    verb: PATCH
+    url_path: /v2/projects/:project_id/keys/:key_id/comments/:id
+    cli_path: comment/update
+    description: Update an existing comment.
+    response:
+      status: 200
+      resource: comment
+  destroy:
+    title: Delete a comment
+    verb: DELETE
+    url_path: /v2/projects/:project_id/keys/:key_id/comments/:id
+    cli_path: comment/delete
+    description: Delete an existing comment.
+    response:
+      status: 204
+    params: []
+  mark_as_read:
+    title: Mark a comment as read
+    verb: PATCH
+    url_path: /v2/projects/:project_id/keys/:key_id/comments/:id/read
+    cli_path: comment/mark/read
+    description: Mark a comment as read.
+    response:
+      status: 204
+    params: []
+  unmark_as_read:
+    title: Mark a comment as unread
+    verb: DELETE
+    url_path: /v2/projects/:project_id/keys/:key_id/comments/:id/read
+    cli_path: comment/mark/unread
+    description: Mark a comment as unread.
+    response:
+      status: 204
+    params: []
+  check_if_read:
+    title: Check if comment is read
+    verb: GET
+    url_path: /v2/projects/:project_id/keys/:key_id/comments/:id/read
+    cli_path: comment/mark/check
+    description: Check if comment was marked as read. Returns 204 if read, 404 if unread.
+    response:
+      status: 204
+    params: []
+
+meta_description: "Learn how to manage and modify comments via the PhraseApp Api"

@@ -1,0 +1,30 @@
+title: Accounts
+headline: Accounts
+layout: api_resource_v2
+resource_name: account
+order: 1100
+sitemap: true
+actions:
+  index:
+    title: List accounts
+    verb: GET
+    url_path: /v2/accounts
+    cli_path: accounts/list
+    description: List all accounts the current user has access to.
+    paginated: true
+    response:
+      status: 200
+      resource: account
+      plural: true
+    params: []
+  show:
+    title: Get a single account
+    verb: GET
+    url_path: /v2/accounts/:id
+    cli_path: account/show
+    description: Get details on a single account.
+    response:
+      status: 200
+      resource: account
+    params: []
+meta_description: "Learn how to manage and modify acounts via the PhraseApp Api"

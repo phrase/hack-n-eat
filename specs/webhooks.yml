@@ -1,0 +1,94 @@
+title: Webhooks
+headline: Webhooks
+layout: api_resource_v2
+resource_name: webhook
+unavailable_in_enterprise: true
+order: 2000
+sitemap: true
+params:
+  -
+    name: "callback_url"
+    description: "Callback URL to send requests to"
+    type: <code>string</code>
+    optional: false
+    example: "http://example.com/hooks/phraseapp-notifications"
+  -
+    name: "description"
+    description: 'Webhook description'
+    type: <code>string</code>
+    optional: true
+    example: "My webhook for chat notifications"
+  -
+    name: "events"
+    description: 'List of event names to trigger the webhook (separated by comma)'
+    type: "<code>string</code>"
+    optional: false
+    example: "locales:create,translations:update"
+  -
+    name: "active"
+    description: 'Whether webhook is active or inactive'
+    type: <code>boolean</code>
+    optional: true
+    default: true
+
+actions:
+  index:
+    title: List webhooks
+    verb: GET
+    url_path: /v2/projects/:project_id/webhooks
+    cli_path: webhooks/list
+    description: List all webhooks for the given project.
+    paginated: true
+    response:
+      status: 200
+      resource: webhook
+      plural: true
+    params: []
+  show:
+    title: Get a single webhook
+    verb: GET
+    url_path: /v2/projects/:project_id/webhooks/:id
+    cli_path: webhook/show
+    description: Get details on a single webhook.
+    response:
+      status: 200
+      resource: webhook
+    params: []
+  create:
+    title: Create a webhook
+    verb: POST
+    url_path: /v2/projects/:project_id/webhooks
+    cli_path: webhook/create
+    description: Create a new webhook.
+    response:
+      status: 201
+      resource: webhook
+  update:
+    title: Update a webhook
+    verb: PATCH
+    url_path: /v2/projects/:project_id/webhooks/:id
+    cli_path: webhook/update
+    description: Update an existing webhook.
+    response:
+      status: 200
+      resource: webhook
+  destroy:
+    title: Delete a webhook
+    verb: DELETE
+    url_path: /v2/projects/:project_id/webhooks/:id
+    cli_path: webhook/delete
+    description: Delete an existing webhook.
+    response:
+      status: 204
+    params: []
+  test:
+    title: Test a webhook
+    verb: POST
+    url_path: /v2/projects/:project_id/webhooks/:id/test
+    cli_path: webhook/test
+    description: Perform a test request for a webhook.
+    response:
+      status: 200
+    params: []
+
+meta_description: "Learn how to manage and modify webhooks via the PhraseApp Api"

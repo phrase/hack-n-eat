@@ -1,0 +1,140 @@
+title: Orders
+headline: Orders
+layout: api_resource_v2
+resource_name: translation_order
+unavailable_in_enterprise: true
+order: 700
+sitemap: true
+params:
+  -
+    name: "lsp"
+    description: "Name of the LSP that should process this order. Can be one of gengo, textmaster."
+    type: <code>string</code>
+    optional: false
+    example: "textmaster"
+  -
+    name: 'source_locale_id'
+    description: 'Source locale for the order. Can be the name or public id of the source locale. Preferred is the public id.'
+    type: <code>id</code>
+    optional: false
+    example: "abcd1234abcd1234abcd1234abcd1234"
+  -
+    name: 'target_locale_ids'
+    description: 'List of target locales you want the source content translate to. Can be the name or public id of the target locales. Preferred is the public id.'
+    type: <code>array</code> of <code>strings</code>
+    optional: false
+    example: ["1234abcd1234abcd1234abcd1234abcd", "abcd1234abcd1234abcd1234abcd1234"]
+  -
+    name: 'translation_type'
+    description: 'Name of the quality level, availability depends on the LSP. Can be one of:  standard, pro (for orders processed by Gengo) and one of regular, premium, enterprise (for orders processed by TextMaster)'
+    type: <code>string</code>
+    optional: false
+    example: "premium"
+  -
+    name: 'tag'
+    description: 'Tag you want to order translations for.'
+    type: <code>string</code>
+    optional: true
+    example: "my-awesome-feature"
+  -
+    name: 'message'
+    description: 'Message that is displayed to the translators for description.'
+    type: <code>string</code>
+    optional: true
+    example: "Please make everything sound really nice :)"
+  -
+    name: 'styleguide_id'
+    description: 'Style guide for translators to be sent with the order.'
+    type: <code>id</code>
+    optional: true
+    example: "1234abcd1234abcd1234abcd1234abcd"
+  -
+    name: 'unverify_translations_upon_delivery'
+    description: 'Unverify translations upon delivery.'
+    type: <code>boolean</code>
+    optional: true
+    default: false
+  -
+    name: 'include_untranslated_keys'
+    description: 'Order translations for keys with untranslated content in the selected target locales.'
+    type: <code>boolean</code>
+    optional: true
+    default: true
+  -
+    name: 'include_unverified_translations'
+    description: 'Order translations for keys with unverified content in the selected target locales.'
+    type: <code>boolean</code>
+    optional: true
+    default: false
+  -
+    name: 'category'
+    description: 'Category to use (required for orders processed by TextMaster). <a href="#categories">Category List</a>'
+    type: <code>string</code>
+    optional: false
+    example: "C021"
+  -
+    name: 'quality'
+    description: 'Extra proofreading option to ensure consistency in vocabulary and style. Only available for orders processed by TextMaster.'
+    type: <code>boolean</code>
+    optional: true
+    default: false
+  -
+    name: 'priority'
+    description: 'Indicates whether the priority option should be ordered which decreases turnaround time by 30%. Available only for orders processed by TextMaster.'
+    type: <code>boolean</code>
+    optional: true
+    default: false
+
+actions:
+  index:
+    title: List orders
+    verb: GET
+    url_path: /v2/projects/:project_id/orders
+    cli_path: orders/list
+    description: List all orders for the given project.
+    paginated: true
+    response:
+      status: 200
+      resource: translation_order
+      plural: true
+    params: []
+  show:
+    title: Get a single order
+    verb: GET
+    url_path: /v2/projects/:project_id/orders/:id
+    cli_path: order/show
+    description: Get details on a single order.
+    response:
+      status: 200
+      resource: translation_order
+    params: []
+  create:
+    title: Create a new order
+    verb: POST
+    url_path: /v2/projects/:project_id/orders
+    cli_path: order/create
+    description: Create a new order. Access token scope must include <code>orders.create</code>.
+    response:
+      status: 201
+      resource: translation_order
+  confirm:
+    title: Confirm an order
+    verb: PATCH
+    url_path: /v2/projects/:project_id/orders/:id/confirm
+    cli_path: order/confirm
+    description: Confirm an existing order and send it to the provider for translation. Same constraints as for create.
+    response:
+      status: 200
+      resource: translation_order
+    params: []
+  destroy:
+    title: Cancel an order
+    verb: DELETE
+    url_path: /v2/projects/:project_id/orders/:id
+    cli_path: order/delete
+    description: Cancel an existing order. Must not yet be confirmed.
+    response:
+      status: 204
+    params: []
+
+meta_description: "Learn how to manage and modify orders via the PhraseApp Api"

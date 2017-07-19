@@ -1,0 +1,369 @@
+title: Translations
+headline: Translations
+layout: api_resource_v2
+resource_name: translation
+order: 500
+sitemap: true
+placeholders:
+  q_description: "Specify a query to find translations by content (including wildcards).<br><br>
+                      The following qualifiers are supported in the query:<br>
+                      <ul>
+                        <li><code>tags:XYZ</code> for tags on the translation</li>
+                        <li><code>unverified:{true|false}</code> for verification status</li>
+                        <li><code>excluded:{true|false}</code> for exclusion status</li>
+                        <li><code>updated_at:{>=|<=}2013-02-21T00:00:00Z</code> for date range queries</li>
+                      </ul>
+                      Find more examples <a href=\"api/v2/general/examples/\">here</a>."
+params:
+  -
+    name: "locale_id"
+    description: 'Locale. Can be the name or public id of the locale. Preferred is the public id.'
+    type: "<code>id</code>"
+    optional: false
+    example: "abcd1234cdef1234abcd1234cdef1234"
+  -
+    name: "key_id"
+    description: 'Key'
+    type: "<code>id</code>"
+    optional: false
+    example: "abcd1234cdef1234abcd1234cdef1234"
+  -
+    name: "content"
+    description: 'Translation content'
+    type: "<code>string</code>"
+    optional: false
+    example: "My translation"
+  -
+    name: "plural_suffix"
+    description: 'Plural suffix. Can be one of: zero, one, two, few, many, other.'
+    type: "<code>string</code>"
+    optional: true
+    example: "other"
+    default: "<blank>"
+  -
+    name: "unverified"
+    description: 'Indicates whether translation is unverified.'
+    type: "<code>boolean</code>"
+    optional: true
+    default: false
+  -
+    name: "excluded"
+    description: 'Indicates whether translation is excluded.'
+    type: "<code>boolean</code>"
+    optional: true
+    default: false
+
+actions:
+  index:
+    title: List all translations
+    verb: GET
+    url_path: /v2/projects/:project_id/translations
+    cli_path: translations/list
+    description: "List translations for the given project. If you want to download all translations for one locale we recommend to use the <code>locales#download</code> endpoint."
+    rate_limited: true
+    paginated: true
+    response:
+      status: 200
+      resource: translation
+      plural: true
+    params:
+      -
+        name: sort
+        description: "Sort criteria. Can be one of: key_name, created_at, updated_at."
+        type: <code>string</code>
+        default: key_name
+        optional: true
+        example: "updated_at"
+      -
+        name: order
+        description: "Order direction. Can be one of: asc, desc."
+        type: <code>string</code>
+        default: asc
+        optional: true
+        example: "desc"
+      -
+        name: q
+        description: q_description_placeholder
+        type: <code>string</code>
+        optional: true
+        example: "PhraseApp*%20unverified:true%20excluded:true%20tags:feature,center"
+  index_locale:
+    title: List translations by locale
+    verb: GET
+    url_path: /v2/projects/:project_id/locales/:locale_id/translations
+    cli_path: translations/by_locale
+    description: List translations for a specific locale. If you want to download all translations for one locale we recommend to use the <code>locales#download</code> endpoint.
+    paginated: true
+    response:
+      status: 200
+      resource: translation
+      plural: true
+    params:
+      -
+        name: sort
+        description: "Sort criteria. Can be one of: key_name, created_at, updated_at."
+        type: <code>string</code>
+        default: key_name
+        optional: true
+        example: "updated_at"
+      -
+        name: order
+        description: "Order direction. Can be one of: asc, desc."
+        type: <code>string</code>
+        default: asc
+        optional: true
+        example: "desc"
+      -
+        name: q
+        description: q_description_placeholder
+        type: <code>string</code>
+        optional: true
+        example: "PhraseApp*%20unverified:true%20excluded:true%20tags:feature,center"
+  index_keys:
+    title: List translations by key
+    verb: GET
+    url_path: /v2/projects/:project_id/keys/:key_id/translations
+    cli_path: translations/by_key
+    description: List translations for a specific key.
+    paginated: true
+    response:
+      status: 200
+      resource: translation
+      plural: true
+    params:
+      -
+        name: sort
+        description: "Sort criteria. Can be one of: key_name, created_at, updated_at."
+        type: <code>string</code>
+        default: key_name
+        optional: true
+        example: "updated_at"
+      -
+        name: order
+        description: "Order direction. Can be one of: asc, desc."
+        type: <code>string</code>
+        default: asc
+        optional: true
+        example: "desc"
+      -
+        name: q
+        description: q_description_placeholder
+        type: <code>string</code>
+        optional: true
+        example: "PhraseApp*%20unverified:true%20excluded:true%20tags:feature,center"
+  search:
+    title: List all translations
+    verb: POST
+    url_path: /v2/projects/:project_id/translations/search
+    cli_path: translations/search
+    description: "List translations for the given project if you exceed GET request limitations on translations list. If you want to download all translations for one locale we recommend to use the <code>locales#download</code> endpoint."
+    paginated: true
+    response:
+      status: 200
+      resource: translation
+      plural: true
+    params:
+      -
+        name: sort
+        description: "Sort criteria. Can be one of: key_name, created_at, updated_at."
+        type: <code>string</code>
+        default: key_name
+        optional: true
+        example: "updated_at"
+      -
+        name: order
+        description: "Order direction. Can be one of: asc, desc."
+        type: <code>string</code>
+        default: asc
+        optional: true
+        example: "desc"
+      -
+        name: q
+        description: q_description_placeholder
+        type: <code>string</code>
+        optional: true
+        example: "PhraseApp*%20unverified:true%20excluded:true%20tags:feature,center"
+  show:
+    title: Get a single translation
+    verb: GET
+    url_path: /v2/projects/:project_id/translations/:id
+    cli_path: translation/show
+    description: Get details on a single translation.
+    response:
+      status: 200
+      resource: translation_details
+    params: []
+  create:
+    title: Create a translation
+    verb: POST
+    url_path: /v2/projects/:project_id/translations
+    cli_path: translation/create
+    description: Create a translation.
+    response:
+      status: 201
+      resource: translation_details
+  update:
+    title: Update a translation
+    verb: PATCH
+    url_path: /v2/projects/:project_id/translations/:id
+    cli_path: translation/update
+    description: Update an existing translation.
+    response:
+      status: 200
+      resource: translation_details
+    params:
+      -
+        name: "content"
+        description: 'Translation content'
+        type: "<code>string</code>"
+        optional: false
+        example: "My translation"
+      -
+        name: "plural_suffix"
+        description: 'Plural suffix. Can be one of: zero, one, two, few, many, other.'
+        type: "<code>string</code>"
+        optional: true
+        example: "other"
+        default: "<blank>"
+      -
+        name: "unverified"
+        description: 'Indicates whether translation is unverified.'
+        type: "<code>boolean</code>"
+        optional: true
+        default: false
+      -
+        name: "excluded"
+        description: 'Indicates whether translation is excluded.'
+        type: "<code>boolean</code>"
+        optional: true
+        default: false
+ # machine_translate:
+ #   title: Fill with machine translation if possible
+ #   verb: PATCH
+ #   url_path: /v2/projects/:project_id/translations/:id/machine_translate
+ #   cli_path: translation/machine_translate
+ #   description: Update a translation with machine translation
+ #   response:
+ #     status: 204
+ #   params: []
+  verify:
+    title: Verify translations selected by query
+    verb: PATCH
+    url_path: /v2/projects/:project_id/translations/verify
+    cli_path: translations/verify
+    description: "Verify translations matching query."
+    response:
+      status: 200
+      resource: affected_count
+    params:
+      -
+        name: q
+        description: q_description_placeholder
+        type: <code>string</code>
+        optional: true
+        example: "PhraseApp*%20unverified:true%20tags:feature,center"
+      -
+        name: sort
+        description: "Sort criteria. Can be one of: key_name, created_at, updated_at."
+        type: <code>string</code>
+        default: key_name
+        optional: true
+        example: "updated_at"
+      -
+        name: order
+        description: "Order direction. Can be one of: asc, desc."
+        type: <code>string</code>
+        default: asc
+        optional: true
+        example: "desc"
+  unverify:
+    title: Mark translations selected by query as unverified
+    verb: PATCH
+    url_path: /v2/projects/:project_id/translations/unverify
+    cli_path: translations/unverify
+    description: "Mark translations matching query as unverified."
+    response:
+      status: 200
+      resource: affected_count
+    params:
+      -
+        name: q
+        description: q_description_placeholder
+        type: <code>string</code>
+        optional: true
+        example: "PhraseApp*%20verified:true%20tags:feature,center"
+      -
+        name: sort
+        description: "Sort criteria. Can be one of: key_name, created_at, updated_at."
+        type: <code>string</code>
+        default: key_name
+        optional: true
+        example: "updated_at"
+      -
+        name: order
+        description: "Order direction. Can be one of: asc, desc."
+        type: <code>string</code>
+        default: asc
+        optional: true
+        example: "desc"
+  exclude:
+    title: Set exclude from export flag on translations selected by query
+    verb: PATCH
+    url_path: /v2/projects/:project_id/translations/exclude
+    cli_path: translations/exclude
+    description: "Exclude translations matching query from locale export."
+    response:
+      status: 200
+      resource: affected_count
+    params:
+      -
+        name: q
+        description: q_description_placeholder
+        type: <code>string</code>
+        optional: true
+        example: "PhraseApp*%20verified:true%20tags:feature,center"
+      -
+        name: sort
+        description: "Sort criteria. Can be one of: key_name, created_at, updated_at."
+        type: <code>string</code>
+        default: key_name
+        optional: true
+        example: "updated_at"
+      -
+        name: order
+        description: "Order direction. Can be one of: asc, desc."
+        type: <code>string</code>
+        default: asc
+        optional: true
+        example: "desc"
+  include:
+    title: Remove exlude from import flag from translations selected by query
+    verb: PATCH
+    url_path: /v2/projects/:project_id/translations/include
+    cli_path: translations/include
+    description: "Include translations matching query in locale export."
+    response:
+      status: 200
+      resource: affected_count
+    params:
+      -
+        name: q
+        description: q_description_placeholder
+        type: <code>string</code>
+        optional: true
+        example: "PhraseApp*%20verified:true%20tags:feature,center"
+      -
+        name: sort
+        description: "Sort criteria. Can be one of: key_name, created_at, updated_at."
+        type: <code>string</code>
+        default: key_name
+        optional: true
+        example: "updated_at"
+      -
+        name: order
+        description: "Order direction. Can be one of: asc, desc."
+        type: <code>string</code>
+        default: asc
+        optional: true
+        example: "desc"
+meta_description: "Learn how to manage and modify translations via the PhraseApp Api"

@@ -1,0 +1,82 @@
+title: Authorizations
+headline: Authorization with OAuth tokens
+layout: api_resource_v2
+resource_name: authorization
+order: 100
+sitemap: true
+params:
+  -
+    name: "note"
+    description: 'A note to help you remember what the access is used for.'
+    type: "<code>string</code>"
+    optional: false
+    example: "My Deploy Script"
+  -
+    name: "scopes"
+    description: 'A list of scopes that the access can be used for.'
+    type: "<code>array</code> of <code>strings</code>"
+    optional: true
+    example: ["read", "write"]
+  -
+    name: "expires_at"
+    description: 'Expiration date for the authorization token. Null means no expiration date (default).'
+    type: "<code>datetime</code>"
+    optional: true
+    example: "2015-03-30T09:52:53Z"
+actions:
+  index:
+    title: List authorizations
+    verb: GET
+    url_path: /v2/authorizations
+    cli_path: authorizations/list
+    description: List all your authorizations.
+    deny_access_token: true
+    paginated: true
+    response:
+      status: 200
+      resource: authorization
+      plural: true
+    params: []
+  show:
+    title: Get a single authorization
+    verb: GET
+    url_path: /v2/authorizations/:id
+    cli_path: authorization/show
+    description: Get details on a single authorization.
+    deny_access_token: true
+    response:
+      status: 200
+      resource: authorization
+    params: []
+  create:
+    title: Create an authorization
+    verb: POST
+    url_path: /v2/authorizations
+    cli_path: authorization/create
+    description: Create a new authorization.
+    deny_access_token: true
+    response:
+      status: 201
+      resource: authorization_with_token
+  update:
+    title: Update an authorization
+    verb: PATCH
+    url_path: /v2/authorizations/:id
+    cli_path: authorization/update
+    description: Update an existing authorization.
+    deny_access_token: true
+    response:
+      status: 200
+      resource: authorization
+  destroy:
+    title: Delete an authorization
+    verb: DELETE
+    url_path: /v2/authorizations/:id
+    cli_path: authorization/delete
+    description: Delete an existing authorization. API calls using that token will stop working.
+    deny_access_token: true
+    response:
+      status: 204
+    params: []
+
+meta_description: "Learn how to manage and modify authorizations via the PhraseApp Api"

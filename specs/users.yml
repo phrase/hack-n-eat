@@ -1,0 +1,20 @@
+title: Users
+headline: Users
+layout: api_resource_v2
+resource_name: user
+order: 1000
+sitemap: true
+actions:
+  user:
+    title: Show current User
+    verb: GET
+    url_path: /v2/user
+    cli_path: show/user
+    description: Show details for current User.
+    response:
+      status: 200
+      resource: user
+      plural: false
+    params: []
+
+meta_description: "Learn how to manage and modify users via the PhraseApp Api"

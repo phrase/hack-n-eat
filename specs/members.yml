@@ -1,0 +1,67 @@
+title: Members
+headline: Members
+layout: api_resource_v2
+resource_name: member
+order: 1200
+sitemap: true
+actions:
+  index:
+    title: List members
+    verb: GET
+    url_path: /v2/accounts/:account_id/members
+    cli_path: members/list
+    description: Get all users active in the account. It also lists resources like projects and locales the member has access to. In case nothing is shown the default access from the role is used. Access token scope must include <code>team.manage</code>.
+    paginated: true
+    response:
+      status: 200
+      resource: member
+      plural: true
+    params: []
+  show:
+    title: Get single member
+    verb: GET
+    url_path: /v2/accounts/:account_id/members/:id
+    cli_path: member/show
+    description: Get details on a single user in the account. Access token scope must include <code>team.manage</code>.
+    response:
+      status: 200
+      resource: member
+    params: []
+  update:
+    title: Update a member
+    verb: PATCH
+    url_path: /v2/accounts/:account_id/members/:id
+    cli_path: member/update
+    description: Update user permissions in the account. Developers and translators need <code>project_ids</code> and <code>locale_ids</code> assigned to access them. Access token scope must include <code>team.manage</code>.
+    response:
+      status: 200
+      resource: member
+    params:
+      - 
+        name: "role"
+        description: 'Member role, can be any of of Manager, Developer, Translator'
+        type: <code>string</code>
+        optional: false
+        example: "Developer"
+      -
+        name: "project_ids"
+        description: 'List of project ids the user has access to. '
+        type: <code>string</code>
+        optional: true
+        example: "abcd1234abcd1234abcd1234,abcd1234abcd1234abcd1235"
+      -
+        name: "locale_ids"
+        description: 'List of locale ids the user has access to.'
+        type: <code>string</code>
+        optional: true
+        example: "abcd1234abcd1234abcd1234,abcd1234abcd1234abcd1235"   
+  destroy:
+    title: Remove a user from the account
+    verb: DELETE
+    url_path: /v2/accounts/:account_id/members/:id
+    cli_path: member/delete
+    description: Remove a user from the account. The user will be removed from the account but not deleted from PhraseApp. Access token scope must include <code>team.manage</code>.
+    response:
+      status: 204
+    params: []  
+meta_description: "Learn how to manage and modify members via the PhraseApp Api"

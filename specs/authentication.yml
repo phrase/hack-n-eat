@@ -1,0 +1,7 @@
+title: Authentication
+headline: API v2 Authentication
+order: 100
+layout: api_v2
+sitemap: true
+skip_generator: true
+meta_description: "Learn about the different ways to authenticate the PhraseApp API with E-Mail and password or Oauth Access Token"
